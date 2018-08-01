@@ -1,0 +1,22 @@
+.second {
+    background-color: #dafef3;
+}
+
+h1 {
+    color: #06d397;
+}
+
+span {
+    color: #07e3a3;
+}
+
+button {
+    color: #dafef3;
+    background-color: #06d397;
+}
+
+button:hover,
+button:active {
+    color: #06d397;
+    background-color: #fff;
+}

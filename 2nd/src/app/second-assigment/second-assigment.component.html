@@ -1,0 +1,15 @@
+<!-- used ngModel for updating username - Two-Way-Binding -->
+<!-- used input event to check wether the username is not empty -->
+<input 
+  type="text"
+  class="form-control"
+  placeholder="username"
+  [(ngModel)] = "username">
+
+<p>{{ username }}</p>
+
+<button
+  class="btn btn-primary"
+  [disabled]="username === ''"
+  (click)="username = ''">Reset UserName
+</button> 

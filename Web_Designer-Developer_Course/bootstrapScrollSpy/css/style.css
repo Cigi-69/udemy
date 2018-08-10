@@ -1,0 +1,19 @@
+body {
+    padding-top: 80px;
+}
+
+.highlight {
+    background: #bada55;
+    border: solid 1px #000;
+}
+
+.small-box {
+    width: 300px;
+}
+
+#scrollerBox {
+    position: relative;
+    top 200px;
+    height: 800px;
+    overflow: scroll;
+}

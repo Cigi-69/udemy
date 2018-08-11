@@ -1,0 +1,26 @@
+body {
+    color: #fff;
+    background: #000;
+    text-align: center;
+}
+
+.container-fluid {
+    position: relative;
+}
+
+.page-header {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding-top: 20%;
+    z-index: 5;
+    background: rgba(0,0,0,0.2)
+}
+
+.page-header h1 {
+    font-size: 4rem;
+    font-weight: bolder;
+}

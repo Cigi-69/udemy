@@ -1,35 +1,42 @@
 // Create an array with five todos
-// You have x todos
-// Print the first and second to last items -> Todo: walk the dog
+// 1. Convert array to array of objects -> text, completed
+// 2. Create function to remove a todo by text value
 
-const todos = ['Walkt the dog', 'Go to the store', 'Pick up laundry', 'Learn something new', 'Go to run'];
+const todos = [{
+    text: 'Walk the dog',
+    completed: true
+}, {
+    text: 'Go to the store',
+    completed: false
+}, {
+    text: 'Pick up laundry',
+    completed: true
+}, {
+    text: 'Learn something new',
+    completed: false
+}, {
+    text: 'Go to run',
+    completed: false
+}];
 
-// console.log(`Todo: ${todos[0]}`);
-// console.log(`Todo: ${todos[todos.length - 2]}`);
+const deleteTodo = function (todos, todoText) {
+    const index = todos.findIndex(function (todo) {
+        return todo.text.toLowerCase() === todoText.toLowerCase();
+    });
+    if (index >= 0) {
+        todos.splice(index, 1);
+        return console.log(`Todo "${todoText}" has been deleted!`);
+    } else {
+        return console.log(`Todo "${todoText}" was not found! 0 items deleted`);
+    }
+}
 
-// Delete the 3rd item
-// Add a new item onto the end
-// Remove the first item from the list
+deleteTodo(todos, 'walk the dog');
 
-todos.splice(2, 1);
-todos.push('Go to the Gym');
-todos.shift();
-
-// console.log(todos);
-// for (let i = 0; i < todos.length; i++) {
-//     console.log(`Todo ${i + 1}: ${todos[i]}`);
-// }
 console.log(`You have ${todos.length} ToDos.`);
 console.log('-------------------------------');
-todos.forEach(function(item, index) {
-    console.log(`Todo ${index + 1}: ${item}`);
-});
+// todos.forEach(function (item, index) {
+//     console.log(`Todo ${index + 1}: ${item}`);
+// });
 
-// console.log('');
-
-// console.log('-----With for statement!-----');
-// for (let i = 0; i < todos.length; i++) {
-//     console.log(`${i +1}. ${todos[i]}`);
-// }
-
-
+console.log(todos);

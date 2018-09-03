@@ -32,8 +32,8 @@ const notes = [{
 //     console.log(item);
 // });
 
-console.log(notes.length);
-console.log(notes);
+// console.log(notes.length);
+// console.log(notes);
 
 // Counting... 1
 // for(let i = 0; i < 3; i++) {
@@ -51,11 +51,28 @@ console.log(notes);
 //     console.log(`Note ${i + 1}: ${notes[i]}`);
 // }
 
-const index = notes.findIndex(function (note, index) {
-    console.log(note);
-    return note.title === 'Habbits to work on';
-})
+const findNote = function (notes, noteTitle) {
+    return notes.find(function (note, index){
+        return note.title.toLowerCase() === noteTitle.toLowerCase();
+    })
+}
 
-console.log(index);
+// const findNote = function (notes, noteTitle) {
+//     const index = notes.findIndex(function (note, index) {
+//         return note.title.toLowerCase() === noteTitle.toLowerCase();
+//     })
+//     return notes[index]
+// }
+
+const note = findNote(notes, 'Office modification');
+console.log(note);
+
+
+// const index = notes.findIndex(function (note, index) {
+//     console.log(note);
+//     return note.title === 'Habbits to work on';
+// })
+
+// console.log(index);
 
 

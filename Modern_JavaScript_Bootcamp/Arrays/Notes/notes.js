@@ -25,3 +25,19 @@ notes.forEach(function (item, index) {
 
 console.log(notes.length);
 console.log(notes);
+
+// Counting... 1
+// for(let i = 0; i < 3; i++) {
+//     console.log(`Counting... ${i + 1}`);
+
+// }
+
+for(let i = 0; i < notes.length; i++) {
+    console.log(`Note ${i + 1}: ${notes[i]}`);
+}
+
+console.log('------------------------------');
+
+for (let i = notes.length - 1; i >= 0; i--) {
+    console.log(`Note ${i + 1}: ${notes[i]}`);
+}

@@ -24,3 +24,12 @@ console.log('-------------------------------');
 todos.forEach(function(item, index) {
     console.log(`Todo ${index + 1}: ${item}`);
 });
+
+// console.log('');
+
+// console.log('-----With for statement!-----');
+// for (let i = 0; i < todos.length; i++) {
+//     console.log(`${i +1}. ${todos[i]}`);
+// }
+
+

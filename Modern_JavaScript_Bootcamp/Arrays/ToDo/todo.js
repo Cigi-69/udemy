@@ -31,12 +31,20 @@ const deleteTodo = function (todos, todoText) {
     }
 }
 
-deleteTodo(todos, 'walk the dog');
+// deleteTodo(todos, 'walk the dog');
 
-console.log(`You have ${todos.length} ToDos.`);
-console.log('-------------------------------');
+// console.log(`You have ${todos.length} ToDos.`);
+// console.log('-------------------------------');
 // todos.forEach(function (item, index) {
 //     console.log(`Todo ${index + 1}: ${item}`);
 // });
 
-console.log(todos);
+// console.log(todos);
+
+const getThingsToDo = function (todos) {
+    return todos.filter(function (todo) {
+        return !todo.completed;
+    })
+}
+
+console.log(getThingsToDo(todos));

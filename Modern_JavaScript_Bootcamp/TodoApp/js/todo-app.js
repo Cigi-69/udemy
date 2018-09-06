@@ -32,17 +32,9 @@ const createNewElement = function (element, text, appendTo) {
 // function for listing all todos
 const listAllTodos = function (todos) {
     notCompletedAmount(todos);
-    if (!filters.checkgoxActivated) {
         todos.forEach(function (todo, index) {
             createNewElement('p', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, '#todos-div');
         });
-    } else {
-        todos.forEach(function (todo, index) {
-            if (todo.completed === false) {
-                createNewElement('p', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, '#todos-div');
-            }
-        });
-    }
 }
 
 // filtering the todo - which are not completed yet
@@ -56,20 +48,17 @@ const notCompletedAmount = function (todos) {
 // filtering the todos
 const filterTodos = function (todos, filters) {
     let filteredTodos = todos.filter(function (todo) {
-        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
+        // if there is a match - return true
+        let searchMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
+        // checkbox not-checked -> always true -> all todos || otherwise -> always flase -> todos with todo.completed === false;
+        let hideCompletedMatch = !filters.checkgoxActivated || !todo.completed;
+        return searchMatch && hideCompletedMatch;
     });
     document.querySelector('#todos-div').innerHTML = '';
     listAllTodos(filteredTodos);
 }
 
-const hideCompleted = function (todos, filters) {
-    let hided = todos.filter(function(todo) {
-        return todo.completed === true;
-    });
-    return hided;
-    // filterTodos(hided, filters);
-}
-
+// function for creating new todo - pushing todo object into original array of objects
 const createNewTodo = function (todos, text) {
     todos.push({text: text, completed: false})
 }
@@ -92,7 +81,7 @@ document.querySelector('#todo-form').addEventListener('submit', function (e) {
 // Listening for the checkbox
 document.querySelector('#hide-completed').addEventListener('change', function (e) {
     filters.checkgoxActivated = e.target.checked;
-    document.querySelector('#todos-div').innerHTML = '';
+    // document.querySelector('#todos-div').innerHTML = '';
     filterTodos(todos, filters);
 })
 

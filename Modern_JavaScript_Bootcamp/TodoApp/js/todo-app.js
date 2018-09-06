@@ -33,7 +33,13 @@ const allTodos = function (todos) {
     });
 };
 
+// Listen for new todo creation
+document.querySelector('#add-todo').addEventListener('click', function(e){
+    console.log('Add new todo!');
+})
+
 createElement(`You have ${todosLeft.length} todos left.`, 'h2');
 allTodos(todos);
+
 
 

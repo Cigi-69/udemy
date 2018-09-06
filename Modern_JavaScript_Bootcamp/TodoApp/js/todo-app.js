@@ -21,42 +21,37 @@ const filters = {
     searchText: ''
 }
 
-// how many todos needs to be completed
-const todosLeft = function (todos) {
-    let toComplete = todos.filter(function (todo) {
-        return !todo.completed;
-    });
-    return toComplete.length;
+// function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
+const createNewElement = function (element, text, appendTo) {
+    let newElement = document.createElement(element);
+    newElement.textContent = text;
+    document.querySelector(appendTo).appendChild(newElement);
 }
 
-// function for creating the elements
-const createElement = function (text, element) {
-    const newParagraph = document.createElement(element);
-    newParagraph.textContent = text;
-    document.querySelector('#todos-div').appendChild(newParagraph);
-};
-
-// list all todos and put them into page
+// function for listing all todos
 const listAllTodos = function (todos) {
+    notCompletedAmount(todos);
     todos.forEach(function (todo, index) {
-        createElement(`${index + 1}. ${todo.text} - Completed: ${todo.completed}`, 'p');
+        createNewElement('p', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, '#todos-div');
     });
-};
+}
 
-// todos - filtered based on the input and rendered into page
-const renderedTodos = function (todos, filters) {
-    const filteredTodos = todos.filter(function (todo) {
+// filtering the todo - which are not completed yet
+const notCompletedAmount = function (todos) {
+    let notDone = todos.filter(function (todo) {
+        return !todo.completed;
+    });
+    createNewElement('h2', `You have ${notDone.length} todos.`, '#todos-div');
+}
+
+// filtering the todos
+const filterTodos = function (todos, filters) {
+    let filteredTodos = todos.filter(function (todo) {
         return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
     });
     document.querySelector('#todos-div').innerHTML = '';
-    // creating h2 - with number of not completed tasks
-    createElement(`You have ${todosLeft(filteredTodos)} todos left.`, 'h2');
-    // listed all new filtered todos
     listAllTodos(filteredTodos);
 }
-
-// initail rendering - to be displayed something
-renderedTodos(todos, filters);
 
 // Listen for new todo creation
 document.querySelector('#add-todo').addEventListener('click', function(e){
@@ -69,10 +64,14 @@ document.querySelector('#new-todo').addEventListener('input', function (e) {
 
 })
 
-// Listen for input for filter
+// Listening for the input for searching
 document.querySelector('#search-text').addEventListener('input', function (e) {
     filters.searchText = e.target.value;
-    renderedTodos(todos, filters);
+    filterTodos(todos, filters);
+
 })
+
+listAllTodos(todos);
+// console.log(notCompleted(todos));
 
 

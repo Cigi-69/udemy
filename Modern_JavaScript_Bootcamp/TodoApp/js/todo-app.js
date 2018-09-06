@@ -53,22 +53,23 @@ const filterTodos = function (todos, filters) {
     listAllTodos(filteredTodos);
 }
 
-// Listen for new todo creation
-document.querySelector('#add-todo').addEventListener('click', function(e){
-    console.log('Add new todo!');
-})
-
-// Listen for input for new todo
-document.querySelector('#new-todo').addEventListener('input', function (e) {
-    console.log(e.target.value);
-
-})
+const createNewTodo = function (todos, text) {
+    todos.push({text: text, completed: false})
+}
 
 // Listening for the input for searching
 document.querySelector('#search-text').addEventListener('input', function (e) {
     filters.searchText = e.target.value;
     filterTodos(todos, filters);
+})
 
+// Listening for submit, preventing default behaviour, listing all todos again
+document.querySelector('#todo-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    createNewTodo(todos, e.target.elements.textTodo.value);
+    document.querySelector('#todos-div').innerHTML = '';
+    filterTodos(todos, filters);
+    e.target.elements.textTodo.value = '';
 })
 
 listAllTodos(todos);

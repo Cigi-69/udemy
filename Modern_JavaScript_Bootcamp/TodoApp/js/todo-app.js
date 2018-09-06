@@ -24,7 +24,7 @@ const filters = {
 
 // function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
 const createNewElement = function (element, text, appendTo) {
-    let newElement = document.createElement(element);
+    const newElement = document.createElement(element);
     newElement.textContent = text;
     document.querySelector(appendTo).appendChild(newElement);
 }
@@ -39,19 +39,19 @@ const listAllTodos = function (todos) {
 
 // filtering the todo - which are not completed yet
 const notCompletedAmount = function (todos) {
-    let notDone = todos.filter(function (todo) {
+    const notDone = todos.filter(function (todo) {
         return !todo.completed;
     });
-    createNewElement('h2', `You have ${notDone.length} todos.`, '#todos-div');
+    createNewElement('h2', `You have ${notDone.length} todos to do.`, '#todos-div');
 }
 
 // filtering the todos
 const filterTodos = function (todos, filters) {
-    let filteredTodos = todos.filter(function (todo) {
+    const filteredTodos = todos.filter(function (todo) {
         // if there is a match - return true
-        let searchMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
+        const searchMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
         // checkbox not-checked -> always true -> all todos || otherwise -> always flase -> todos with todo.completed === false;
-        let hideCompletedMatch = !filters.checkgoxActivated || !todo.completed;
+        const hideCompletedMatch = !filters.checkgoxActivated || !todo.completed;
         return searchMatch && hideCompletedMatch;
     });
     document.querySelector('#todos-div').innerHTML = '';

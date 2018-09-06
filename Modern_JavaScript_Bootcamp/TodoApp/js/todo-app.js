@@ -18,7 +18,8 @@ const todos = [{
 
 // object of filters
 const filters = {
-    searchText: ''
+    searchText: '',
+    checkgoxActivated: false
 }
 
 // function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
@@ -31,9 +32,17 @@ const createNewElement = function (element, text, appendTo) {
 // function for listing all todos
 const listAllTodos = function (todos) {
     notCompletedAmount(todos);
-    todos.forEach(function (todo, index) {
-        createNewElement('p', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, '#todos-div');
-    });
+    if (!filters.checkgoxActivated) {
+        todos.forEach(function (todo, index) {
+            createNewElement('p', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, '#todos-div');
+        });
+    } else {
+        todos.forEach(function (todo, index) {
+            if (todo.completed === false) {
+                createNewElement('p', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, '#todos-div');
+            }
+        });
+    }
 }
 
 // filtering the todo - which are not completed yet
@@ -51,6 +60,14 @@ const filterTodos = function (todos, filters) {
     });
     document.querySelector('#todos-div').innerHTML = '';
     listAllTodos(filteredTodos);
+}
+
+const hideCompleted = function (todos, filters) {
+    let hided = todos.filter(function(todo) {
+        return todo.completed === true;
+    });
+    return hided;
+    // filterTodos(hided, filters);
 }
 
 const createNewTodo = function (todos, text) {
@@ -72,7 +89,15 @@ document.querySelector('#todo-form').addEventListener('submit', function (e) {
     e.target.elements.textTodo.value = '';
 })
 
+// Listening for the checkbox
+document.querySelector('#hide-completed').addEventListener('change', function (e) {
+    filters.checkgoxActivated = e.target.checked;
+    document.querySelector('#todos-div').innerHTML = '';
+    filterTodos(todos, filters);
+})
+
 listAllTodos(todos);
 // console.log(notCompleted(todos));
+
 
 

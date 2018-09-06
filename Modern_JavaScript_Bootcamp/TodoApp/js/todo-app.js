@@ -38,6 +38,10 @@ document.querySelector('#add-todo').addEventListener('click', function(e){
     console.log('Add new todo!');
 })
 
+document.querySelector('#new-todo').addEventListener('input', function (e) {
+    console.log(e.target.value);
+})
+
 createElement(`You have ${todosLeft.length} todos left.`, 'h2');
 allTodos(todos);
 

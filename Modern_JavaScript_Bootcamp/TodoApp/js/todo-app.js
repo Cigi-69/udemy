@@ -1,25 +1,17 @@
 // array of objects for ToDo
-const todos = [{
-    text: 'Walk the dog',
-    completed: true
-}, {
-    text: 'Go to the store',
-    completed: false
-}, {
-    text: 'Pick up laundry',
-    completed: true
-}, {
-    text: 'Learn something new',
-    completed: true
-}, {
-    text: 'Go to run',
-    completed: false
-}];
+let todos = [];
 
 // object of filters
 const filters = {
     searchText: '',
     checkgoxActivated: false
+}
+
+// read data from local storage
+const todosJSON = localStorage.getItem('todos');
+// if data exist - parse them into todos
+if (todosJSON !== null) {
+    todos = JSON.parse(todosJSON);
 }
 
 // function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
@@ -60,7 +52,11 @@ const filterTodos = function (todos, filters) {
 
 // function for creating new todo - pushing todo object into original array of objects
 const createNewTodo = function (todos, text) {
-    todos.push({text: text, completed: false})
+    if (text.length > 0) {
+        todos.push({ text: text, completed: false });
+        // updating local sorage with new data
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
 }
 
 // Listening for the input for searching

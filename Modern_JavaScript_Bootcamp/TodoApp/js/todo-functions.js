@@ -17,14 +17,22 @@ const saveTodos = function (todos) {
 const listAllTodos = function (todos) {
     notCompletedAmount(todos);
     todos.forEach(function (todo, index) {
-        createNewElement('p', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, '#todos-div');
+        const path = '#todos-div div:last-of-type';
+        createNewElement('div', '', '#todos-div');
+        createNewElement('input', 'checkbox', path);
+        createNewElement('span', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, path);
+        createNewElement('button', 'x', path);
     });
 }
 
 // Function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
 const createNewElement = function (element, text, appendTo) {
     const newElement = document.createElement(element);
-    newElement.textContent = text;
+    if (element === 'input' && text === 'checkbox') {
+        newElement.setAttribute('type', text);
+    } else {
+        newElement.textContent = text;
+    }
     document.querySelector(appendTo).appendChild(newElement);
 }
 

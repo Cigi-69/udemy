@@ -39,7 +39,7 @@ const createNewElement = function (element, text, appendTo) {
 // Function for creating new todo - pushing todo object into original array of objects
 const createNewTodo = function (todos, text) {
     if (text.length > 0) {
-        todos.push({ text: text, completed: false });
+        todos.push({id: uuidv4(), text: text, completed: false });
         saveTodos(todos);
     }
 }

@@ -26,6 +26,19 @@ const removeTodo = function (id) {
      }
 }
 
+// Function for toggling the Todo
+const toggleTodo = function (id) {
+    const todo = todos.find(function (todo) {
+        return todo.id === id;
+    });
+
+    if (todo !== undefined) {
+        todo.completed = !todo.completed;
+        saveTodos(todos);
+        filterTodos(todos, filters);
+    }
+}
+
 // Function for listing all todos
 const listAllTodos = function (todos) {
     document.querySelector('#todos-div').innerHTML='';
@@ -33,7 +46,9 @@ const listAllTodos = function (todos) {
     todos.forEach(function (todo, index) {
         const path = '#todos-div div:last-of-type';
         createNewElement('div', '', '#todos-div');
-        createNewElement('input', 'checkbox', path);
+        createNewElement('input', 'checkbox', path, todo.completed).addEventListener('change', function () {
+            toggleTodo(todo.id);
+        });
         createNewElement('span', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, path);
         createNewElement('button', 'x', path).addEventListener('click', function () {
             removeTodo(todo.id);
@@ -42,10 +57,11 @@ const listAllTodos = function (todos) {
 }
 
 // Function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
-const createNewElement = function (element, text, appendTo) {
+const createNewElement = function (element, text, appendTo, checked) {
     const newElement = document.createElement(element);
     if (element === 'input' && text === 'checkbox') {
         newElement.setAttribute('type', text);
+        newElement.checked = checked;
     } else {
         newElement.textContent = text;
     }

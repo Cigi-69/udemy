@@ -17,9 +17,9 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 document.querySelector('#todo-form').addEventListener('submit', function (e) {
     e.preventDefault();
     createNewTodo(todos, e.target.elements.textTodo.value);
+    e.target.elements.textTodo.value = '';
     document.querySelector('#todos-div').innerHTML = '';
     filterTodos(todos, filters);
-    e.target.elements.textTodo.value = '';
 })
 
 // Listening for the checkbox

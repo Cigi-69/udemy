@@ -13,15 +13,31 @@ const saveTodos = function (todos) {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
+// Function for removing clicked todo
+const removeTodo = function (id) {
+    const todoIndex = todos.findIndex(function (todo) {
+        return todo.id === id;
+    });
+
+    if (todoIndex > -1) {
+        todos.splice(todoIndex, 1);
+        saveTodos(todos);
+        filterTodos(todos, filters);
+     }
+}
+
 // Function for listing all todos
 const listAllTodos = function (todos) {
+    document.querySelector('#todos-div').innerHTML='';
     notCompletedAmount(todos);
     todos.forEach(function (todo, index) {
         const path = '#todos-div div:last-of-type';
         createNewElement('div', '', '#todos-div');
         createNewElement('input', 'checkbox', path);
         createNewElement('span', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, path);
-        createNewElement('button', 'x', path);
+        createNewElement('button', 'x', path).addEventListener('click', function () {
+            removeTodo(todo.id);
+        });
     });
 }
 
@@ -34,6 +50,7 @@ const createNewElement = function (element, text, appendTo) {
         newElement.textContent = text;
     }
     document.querySelector(appendTo).appendChild(newElement);
+    return newElement;
 }
 
 // Function for creating new todo - pushing todo object into original array of objects

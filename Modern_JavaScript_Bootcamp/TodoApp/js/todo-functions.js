@@ -1,5 +1,5 @@
 // Read existing todos from localStorage
-const getSavedTodos = function () {
+const getSavedTodos = () => {
     const todosJSON = localStorage.getItem('todos');
     if (todosJSON !== null) {
         return JSON.parse(todosJSON);
@@ -9,15 +9,13 @@ const getSavedTodos = function () {
 }
 
 // Updating local sorage with new data
-const saveTodos = function (todos) {
+const saveTodos = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 // Function for removing clicked todo
-const removeTodo = function (id) {
-    const todoIndex = todos.findIndex(function (todo) {
-        return todo.id === id;
-    });
+const removeTodo = (id) => {
+    const todoIndex = todos.findIndex((todo) => todo.id === id);
 
     if (todoIndex > -1) {
         todos.splice(todoIndex, 1);
@@ -27,10 +25,8 @@ const removeTodo = function (id) {
 }
 
 // Function for toggling the Todo
-const toggleTodo = function (id) {
-    const todo = todos.find(function (todo) {
-        return todo.id === id;
-    });
+const toggleTodo = (id) => {
+    const todo = todos.find((todo) => todo.id === id);
 
     if (todo !== undefined) {
         todo.completed = !todo.completed;
@@ -40,24 +36,24 @@ const toggleTodo = function (id) {
 }
 
 // Function for listing all todos
-const listAllTodos = function (todos) {
+const listAllTodos = (todos) => {
     document.querySelector('#todos-div').innerHTML='';
     notCompletedAmount(todos);
-    todos.forEach(function (todo, index) {
+    todos.forEach((todo, index) => {
         const path = '#todos-div div:last-of-type';
         createNewElement('div', '', '#todos-div');
-        createNewElement('input', 'checkbox', path, todo.completed).addEventListener('change', function () {
+        createNewElement('input', 'checkbox', path, todo.completed).addEventListener('change', () => {
             toggleTodo(todo.id);
         });
         createNewElement('span', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, path);
-        createNewElement('button', 'x', path).addEventListener('click', function () {
+        createNewElement('button', 'x', path).addEventListener('click', () => {
             removeTodo(todo.id);
         });
     });
 }
 
 // Function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
-const createNewElement = function (element, text, appendTo, checked) {
+const createNewElement = (element, text, appendTo, checked) => {
     const newElement = document.createElement(element);
     if (element === 'input' && text === 'checkbox') {
         newElement.setAttribute('type', text);
@@ -70,7 +66,7 @@ const createNewElement = function (element, text, appendTo, checked) {
 }
 
 // Function for creating new todo - pushing todo object into original array of objects
-const createNewTodo = function (todos, text) {
+const createNewTodo = (todos, text) => {
     if (text.length > 0) {
         todos.push({id: uuidv4(), text: text, completed: false });
         saveTodos(todos);
@@ -78,16 +74,14 @@ const createNewTodo = function (todos, text) {
 }
 
 // Filtering the todo - which are not completed yet
-const notCompletedAmount = function (todos) {
-    const notDone = todos.filter(function (todo) {
-        return !todo.completed;
-    });
+const notCompletedAmount = (todos) => {
+    const notDone = todos.filter((todo) => !todo.completed);
     createNewElement('h2', `You have ${notDone.length} todos to do.`, '#todos-div');
 }
 
 // Filtering the todos
-const filterTodos = function (todos, filters) {
-    const filteredTodos = todos.filter(function (todo) {
+const filterTodos = (todos, filters) => {
+    const filteredTodos = todos.filter((todo) => {
         // if there is a match - return true
         const searchMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
         // checkbox not-checked -> always true -> all todos || otherwise -> always flase -> todos with todo.completed === false;

@@ -1,7 +1,8 @@
 let notes = getSavedNotes();
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    sortBy: 'byEdited'
 }
 
 
@@ -10,10 +11,13 @@ renderNotes(notes, filters);
 
 document.querySelector('#create-note').addEventListener('click', function(e){
     const id = uuidv4();
+    const timeStamp = moment().valueOf();
     notes.push({
         id: id,
         title: '',
-        body: ''
+        body: '',
+        createdAt: timeStamp,
+        updatedAt: timeStamp
     })
 
     saveNotes(notes);
@@ -26,7 +30,8 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 })
 
 document.querySelector('#filter-by').addEventListener('change', function (e) {
-    console.log(e.target.value);
+    filters.sortBy = e.target.value;
+    renderNotes(notes, filters);
 })
 
 window.addEventListener('storage', function (e) {
@@ -36,17 +41,6 @@ window.addEventListener('storage', function (e) {
     }
 })
 
-// const now = moment();
-// now.subtract(1, 'week').subtract(12, 'days');
-// console.log(now.format('MMMM Do, YYYY'));
-// console.log(now.fromNow());
-
-// const nowTimestamp = now.valueOf();
-// console.log(moment(nowTimestamp).toString());
-
-let birthday = moment();
-birthday.date(5).month(9).year(1988);
-console.log(birthday.format('MMM D, YYYY'));
 
 
 

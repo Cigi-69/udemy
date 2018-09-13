@@ -35,3 +35,46 @@ window.addEventListener('storage', function (e) {
         renderNotes(notes, filters);
     }
 })
+
+
+// Unix Epoch - Jnuary 1st 1970 00:00:00
+
+const now = new Date('January 21 2003 6:25:01');
+const timestamp = now.getTime();
+
+const myDate = new Date(timestamp);
+console.log(myDate.getFullYear());
+
+
+
+
+const dateOne = new Date('January 21 2003 6:25:01');
+const dateTwo = new Date('January 21 2001 6:25:02');
+
+const dateOneTimestamp = dateOne.getTime();
+const dateTwoTimestamp = dateTwo.getTime();
+
+console.log(dateOneTimestamp);
+console.log(dateTwoTimestamp);
+
+if (dateOneTimestamp < dateTwoTimestamp) {
+    console.log(dateOne.toString());
+} else if (dateTwoTimestamp < dateOneTimestamp) {
+    console.log(dateTwo.toString());
+}
+
+
+
+
+
+
+
+// console.log(`Year: ${now.getFullYear()}`);
+// console.log(`Month: ${now.getMonth()}`);
+// console.log(`Day of month: ${now.getDate()}`);
+// console.log(`Hour: ${now.getHours()}`);
+// console.log(`Minute: ${now.getMinutes()}`);
+// console.log(`Seconds: ${now.getSeconds()}`);
+
+
+

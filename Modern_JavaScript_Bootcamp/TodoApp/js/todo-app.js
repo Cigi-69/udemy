@@ -1,3 +1,5 @@
+'use strict';
+
 // array of objects for ToDo
 const todos = getSavedTodos();
 

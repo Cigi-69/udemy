@@ -16,10 +16,13 @@ class Person {
         });
         return bio;
     }
-    setName(fullName) {
+    set fullName(fullName) {
         const names = fullName.split(' ');
         this.firstName = names[0];
         this.lastName = names[1];
+    }
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
     }
 }
 
@@ -29,7 +32,7 @@ class Employee extends Person {
         this.position = position;
     }
     getBio() {
-        return `${this.firstName} ${this.lastName} is a ${this.position}`;
+        return `${this.fullName} is a ${this.position}`;
     }
     getYeardsLeft() {
         return 65 - this.age;
@@ -50,6 +53,12 @@ class Student extends Person {
     }
 }
 
+
+const me = new Employee('John', 'Doe', 25, ['programming', 'soccer'], 'Teacher');
+me.fullName = 'Clancey Turner';
+console.log(me.getBio());
+
+
 // const me = new Employee('John', 'Doe', 29, ['Teaching', 'Biking'], 'Programmer');
 // me.setName('Alexis Turner')
 // console.log(me.getBio());
@@ -57,9 +66,10 @@ class Student extends Person {
 // const person2 = new Person('Clancey', 'Turner', 51);
 // console.log(person2.getBio());
 
-const student = new Student('John', 'Doe', 25, ['programming', 'soccer'], 90);
-console.log(student.getBio());
-student.updateGrade(-45);
-console.log(student.getBio());
+// const student = new Student('John', 'Doe', 25, ['programming', 'soccer'], 90);
+// student.fullName = 'Clancey Turner';
+// console.log(student.getBio());
+// student.updateGrade(-45);
+// console.log(student.getBio());
 
 

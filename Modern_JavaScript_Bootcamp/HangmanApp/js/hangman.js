@@ -17,7 +17,7 @@ class Hangman {
         }
         return this.status;
     }
-    getStatus() {
+    get statusMessage() {
         if (this.status === 'playing') {
             return `Guesses left: ${this.attempts}`;
         } else if (this.status === 'failed') {
@@ -26,9 +26,8 @@ class Hangman {
             return 'Great work! You guessed the word.';
         }
     }
-    getPuzzle() {
+    get puzzle() {
         let puzzle = '';
-
         this.word.forEach((letter) => {
             if (this.guessedLetters.includes(letter) || letter === ' ') {
                 puzzle += letter;

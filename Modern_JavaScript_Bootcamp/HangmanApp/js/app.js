@@ -24,6 +24,9 @@ getPuzzle((error, puzzle) => {
     }
 });
 
+console.log("do something");
+
+
 
 
 // Making an HTTP request

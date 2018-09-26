@@ -22,8 +22,10 @@ getPuzzle('2').then((puzzle) => {
     console.log(`Error: ${error}`);
 });
 
-getCountryDetail('SK').then((country) => {
-    console.log(country.name);
+getLocation().then((location) => {
+    return getCountryDetail(location.country)
+}).then((country) => {
+    console.log(`You are currently locatet in ${country.name}`);
 }).catch((error) => {
     console.log(`Error: ${error}`);
 });

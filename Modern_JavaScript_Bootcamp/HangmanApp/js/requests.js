@@ -21,3 +21,13 @@ const getCountryDetail = (countryCode) => {
         return data.find((country) => country.alpha2Code === countryCode.toUpperCase());
     });
 };
+
+const getLocation = () => {
+    return fetch('https://ipinfo.io/json?token=34c1bbef294ab2').then((response) => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error('Unable to fetch data.');
+        }
+    });
+};

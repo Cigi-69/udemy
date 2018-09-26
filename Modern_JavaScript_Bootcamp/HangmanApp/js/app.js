@@ -16,18 +16,14 @@ window.addEventListener('keypress', function (e) {
     guessesEl.textContent = game1.statusMessage;
 });
 
-getPuzzle('2', (error, puzzle) => {
-    if (error) {
-      console.log(`Error: ${error}`);
-    } else {
-        console.log(puzzle);
-    }
+getPuzzle('2').then((puzzle) => {
+    console.log(puzzle);
+}, (error) => {
+    console.log(`Error: ${error}`);
 });
 
-getCountryDetail('Sk', (error, country) => {
-    if (error) {
-        console.log(`Error: ${error}`);
-    } else {
-        console.log(country.name);
-    }
+getCountryDetail('SK').then((country) => {
+    console.log(country.name);
+}, (error) => {
+    console.log(`Error: ${error}`);
 });

@@ -22,10 +22,16 @@ getPuzzle('2').then((puzzle) => {
     console.log(`Error: ${error}`);
 });
 
-getLocation().then((location) => {
-    return getCountryDetail(location.country)
-}).then((country) => {
-    console.log(`You are currently locatet in ${country.name}`);
+getCurrentCountry().then((country) => {
+    console.log(country.name);
 }).catch((error) => {
-    console.log(`Error: ${error}`);
+    console.log(error);
 });
+
+// getLocation().then((location) => {
+//     return getCountryDetail(location.country)
+// }).then((country) => {
+//     console.log(`You are currently located in ${country.name}`);
+// }).catch((error) => {
+//     console.log(`Error: ${error}`);
+// });

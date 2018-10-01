@@ -9,15 +9,19 @@ window.addEventListener('keypress', function (e) {
 });
 
 const render = () => {
-    puzzleEl.textContent = game1.puzzle;
+    puzzleEl.innerHTML = '';
     guessesEl.textContent = game1.statusMessage;
-}
+
+    game1.puzzle.split('').forEach((letter) => {
+        puzzleEl.innerHTML += `<span>${letter}</span>`;
+    });
+};
 
 const startGame = async () => {
     const puzzle = await getPuzzle(2);
     game1 = new Hangman(puzzle, 5);
     render();
-}
+};
 
 document.querySelector('#reset').addEventListener('click', startGame);
 startGame();

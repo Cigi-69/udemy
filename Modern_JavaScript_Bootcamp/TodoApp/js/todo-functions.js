@@ -41,25 +41,37 @@ const toggleTodo = (id) => {
 const listAllTodos = (todos) => {
     document.querySelector('#todos-div').innerHTML='';
     notCompletedAmount(todos);
-    todos.forEach((todo, index) => {
-        const path = '#todos-div div:last-of-type';
-        createNewElement('div', '', '#todos-div');
-        createNewElement('input', 'checkbox', path, todo.completed).addEventListener('change', () => {
-            toggleTodo(todo.id);
+    if (todos.length > 0) {
+        todos.forEach((todo, index) => {
+            const pathLabel = '#todos-div label:last-of-type';
+            const pathDiv = '#todos-div label:last-of-type div:last-of-type';
+            // createNewElement(element, text, appentTo(path), elementClass, checked(optional))
+            createNewElement('label', '', '#todos-div', 'list-item');
+            createNewElement('div', '', pathLabel, 'list-item__container');
+            createNewElement('input', 'checkbox', pathDiv, '', todo.completed).addEventListener('change', () => {
+                toggleTodo(todo.id);
+            });
+            createNewElement('span', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, pathDiv);
+            createNewElement('button', 'remove', pathLabel, "button button--text").addEventListener('click', () => {
+                removeTodo(todo.id);
+            });
         });
-        createNewElement('span', `${index + 1}. ${todo.text} - completed: ${todo.completed}`, path);
-        createNewElement('button', 'x', path).addEventListener('click', () => {
-            removeTodo(todo.id);
-        });
-    });
+    } else {
+        createNewElement('p', 'No to-dos to show.', '#todos-div', 'empty-message'  );
+    }
+
 }
 
 // Function for creating new element - ELEMENT, TEXT, WHERE TO APPEND
-const createNewElement = (element, text, appendTo, checked) => {
+const createNewElement = (element, text, appendTo, elementClass,checked) => {
     const newElement = document.createElement(element);
+
     if (element === 'input' && text === 'checkbox') {
         newElement.setAttribute('type', text);
         newElement.checked = checked;
+    } else if (elementClass !== '') {
+        newElement.textContent = text;
+        newElement.className = elementClass;
     } else {
         newElement.textContent = text;
     }
@@ -69,8 +81,9 @@ const createNewElement = (element, text, appendTo, checked) => {
 
 // Function for creating new todo - pushing todo object into original array of objects
 const createNewTodo = (todos, text) => {
-    if (text.length > 0) {
-        todos.push({id: uuidv4(), text: text, completed: false });
+    if (text.trim().length > 0) {
+        // If we have property whose value comes from a variable with the exact same name - we can use ES6 object definition shorthand - instead text: text -> text
+        todos.push({id: uuidv4(), text, completed: false });
         saveTodos(todos);
     }
 }
@@ -78,8 +91,9 @@ const createNewTodo = (todos, text) => {
 // Filtering the todo - which are not completed yet
 const notCompletedAmount = (todos) => {
     const notDone = todos.filter((todo) => !todo.completed);
-    createNewElement('h2', `You have ${notDone.length} todos to do.`, '#todos-div');
-}
+    const plural = notDone.length === 1 ? '' : 's';
+        createNewElement('h2', `You have ${notDone.length} todo${plural} to do.`, '#todos-div', 'list-title');
+};
 
 // Filtering the todos
 const filterTodos = (todos, filters) => {

@@ -5,12 +5,12 @@ const filters = {
 
 const getFilters = () => filters
 
-const setFilters = (updates) => {
-    if ( typeof updates.searchText === 'string') {
-        filters.searchText = updates.searchText
+const setFilters = ({ searchText, checkgoxActivated }) => {
+    if ( typeof searchText === 'string') {
+        filters.searchText = searchText
     }
-    if (typeof updates.checkgoxActivated === 'boolean') {
-        filters.checkgoxActivated = updates.checkgoxActivated
+    if (typeof checkgoxActivated === 'boolean') {
+        filters.checkgoxActivated = checkgoxActivated
     }
 }
 

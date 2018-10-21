@@ -1,2 +1,11 @@
 **/node_modules/
+**/albums/android/
+**/albums/ios/
+**/albums/node_modules/
+**/albums/*.json
+**/albums/*.babelrc
+**/albums/*.buckconfig
+**/albums/*.flowconfig
+**/albums/*.gitattributes
+**/albums/*.watchmanconfig
 Modern_JavaScript_Bootcamp/boilerplate/package-lock.json
